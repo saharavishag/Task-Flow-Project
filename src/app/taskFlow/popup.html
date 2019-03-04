@@ -1,0 +1,12 @@
+<h4 mat-dialog-title>Edit Task: {{data.title}}</h4>
+<div mat-dialog-content>
+  <p>Edit input and output</p>
+  <mat-form-field>
+    input: <input matInput [(ngModel)]="data.inputFormat" style="border: solid 1px #ccc; height: 100px">
+    output: <input matInput [(ngModel)]="data.outputFormat" style="border: solid 1px #ccc; height: 100px">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button> &nbsp;
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

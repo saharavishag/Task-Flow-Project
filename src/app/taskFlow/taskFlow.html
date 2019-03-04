@@ -1,0 +1,59 @@
+<form id="formBuilder" [formGroup]="form">
+  <br/>
+  Task Flow Name: <input type="text" formControlName="taskName"> &nbsp;&nbsp;
+  <button type="button" (click)="onSubmit()" [disabled]="form.invalid">
+    +Save Task Flow
+  </button>
+  <br/>
+  <div align="left">
+    <div class="example-container" style="width: 22%;">
+        <h2>Tasks Bar</h2> 
+        <div cdkDropList
+          id="bar"
+          #tasksbar="cdkDropList"
+          [cdkDropListData]="tasks"
+          [cdkDropListConnectedTo]="[taskflow]"
+          class="example-list"
+          style="overflow-y:scroll; height:500px;" 
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let task of tasks" cdkDrag>
+            <p>
+              <button title="Delete Task" (click)="onDelete(task.identifier, task.title, task.jsonInput, task.jsonOutput, task.function);">
+                X
+              </button>
+              <br/><br/>
+              <b>Task Title:</b> {{task.title}}<br> 
+              <b>JSON Input:</b> {{task.jsonInput}}<br>
+              <b>JSON Output:</b> {{task.jsonOutput}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    <div class="example-container" style="width: 885px;">
+      <h2>Build Tasks Flow</h2>
+      <div class="example-boundary-graph">
+        <div cdkDropList
+          id="flow"
+          #taskflow="cdkDropList"
+          cdkDropListOrientation="horizontal"
+          [cdkDropListData]="taskFlow"
+          [cdkDropListConnectedTo]="[tasksbar]"
+          class="example-list"
+          style="border: none; min-height: 500px; background: white; overflow: hidden; display: block;"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box-graph" *ngFor="let task of taskFlow" cdkDrag>
+            <!-- <h1>{{taskFlow.indexOf(task)+1}}</h1> -->
+            <button mat-raised-button (click)="openDialog(task.identifier, task.title, task.jsonInput, task.jsonOutput, task.function)">Edit</button>
+            <p style="font-size: 14px;" title="input: {{task.jsonInput}} output: {{task.jsonOutput}}">
+              <b>Task Title:</b> {{task.title}}<br> 
+              <!-- <b>JSON Input:</b> {{task.jsonInput}}<br>
+              <b>JSON Output:</b> {{task.jsonOutput}} -->
+            </p>
+            <img width="30" height="10" src = "../../assets/right.png"/>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</form>

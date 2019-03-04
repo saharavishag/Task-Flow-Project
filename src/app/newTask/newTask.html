@@ -1,0 +1,31 @@
+
+<form id="formBuilder" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h4>{{title}}</h4>
+    Task Name: <input type="text" formControlName="taskName">
+    <br/>
+    <br/>
+    <div class="container">
+        <div class="column">
+        JSON input format: 
+        <br/>
+        <input type="text" style="height:150px;" formControlName="jsonInput">
+        <br/>
+        </div>
+        <div class="column">
+        JSON output format: 
+        <br/>
+        <input type="text" style="height:150px;" formControlName="jsonOutput">
+        </div>
+    </div>
+    <br/>
+    <br/>
+    Function Name:
+    <br/>
+    <input type="text" formControlName="func">
+    <br/>
+    <br/>
+    <button type="submit" (click)="onSubmit()" [disabled]="form.invalid">
+        Save Task
+    </button>
+</form>
+
